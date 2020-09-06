@@ -1,0 +1,9 @@
+- hosts: 192.165.0.5
+  connection: local
+  tasks:
+    - set_fact:
+        target_ip: "{{ lookup('dig', 'fs-d12345.efs.ap-southeast-2.amazonaws.com', '@192.165.0.1') }}"
+- hosts: remote_machine
+  tasks:
+    - debug:
+        var: hostvars['192.165.0.5'].target_ip
